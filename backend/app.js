@@ -3,6 +3,7 @@ import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
 import authorizeRoles from "./middleware/roleMiddleware.js";
+import taskRoutes from "./routes/taskRoutes.js";
 
 const app = express();
 
@@ -29,6 +30,10 @@ app.get(
     res.json({ message: "Admin access granted" });
   }
 );
+
+app.use("/api/v1/tasks", taskRoutes);
+
+
 
 app.get("/", (req, res) => {
   res.send("API running...");
