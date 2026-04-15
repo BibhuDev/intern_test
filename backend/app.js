@@ -4,12 +4,15 @@ import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
 import authorizeRoles from "./middleware/roleMiddleware.js";
 import taskRoutes from "./routes/taskRoutes.js";
+import errorHandler from "./middleware/errorMiddleware.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoutes);
+app.use(errorHandler);
+
 
 app.get("/api/v1/protected", authMiddleware, (req, res) => {
   res.json({
